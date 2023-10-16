@@ -429,7 +429,7 @@
 							</b-card-body>
 						</b-collapse> -->
 
-						<b-card-header header-tag="header" role="tab" class="p-0">
+						<!-- <b-card-header header-tag="header" role="tab" class="p-0">
 							<b-button
 								block
 								v-b-toggle.collapseAddress
@@ -438,9 +438,10 @@
 								class="text-left px-4 py-3 m-0"
 								>Address</b-button
 							>
-						</b-card-header>
+						</b-card-header> -->
 						<!-- <b-collapse id="collapseAddress" role="tabpanel"> -->
 							<b-card-body>
+								<h5 class="h5 mb-4 text-uppercase font-weight-bold">Address</h5>
 								<b-form-group label="Address" label-for="street_address_1" label-cols-lg="4">
 									<validation-provider
 										vid="street_address_1"
@@ -562,7 +563,7 @@
 					</b-card>
 					<b-card>
 
-						<b-card-header header-tag="header" role="tab" class="p-0 " >
+						<!-- <b-card-header header-tag="header" role="tab" class="p-0 " >
 							<b-button
 								block
 								v-b-toggle.collapseContact
@@ -571,9 +572,10 @@
 								class="text-left px-4 py-3 m-0"
 								>Contact</b-button
 							>
-						</b-card-header>
+						</b-card-header> -->
 						<!-- <b-collapse id="collapseContact" role="tabpanel"> -->
 							<b-card-body>
+								<h5 class="h5 mb-4 text-uppercase font-weight-bold">Contact</h5>
 								<validation-provider
 									vid="phone"
 									name="Phone"
