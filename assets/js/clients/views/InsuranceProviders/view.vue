@@ -41,9 +41,15 @@
 				</b-col>
 				<b-col cols="12" sm="6" lg="6" class="mb-4">
 					<b-badge pill variant="secondary" v-if="entity.active == false">Inactive</b-badge>
-					<b-badge pill variant="info" v-if="entity.default_insurance_type" title="Default Type">
-						{{ entity.default_insurance_type.name }}
-					</b-badge>
+				    <b-badge
+          pill
+          v-for="insuranceType in entity.insurance_types"
+          :key="insuranceType.id"
+          variant="info"
+          class="mr-1"
+        >
+          {{ insuranceType.name }}
+        </b-badge>
 				</b-col>
 				<b-col cols="12" sm="6" lg="6" class="mb-4 text-sm-right">
 					<p class="small text-muted mb-0">
