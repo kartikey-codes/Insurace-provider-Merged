@@ -345,4 +345,3 @@ const exportToCSV = async (total) => {
 };
 
 </script>
-

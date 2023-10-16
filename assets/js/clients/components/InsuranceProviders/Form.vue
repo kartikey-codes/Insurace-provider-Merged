@@ -5,62 +5,107 @@
 			<b-card no-body>
 				<slot name="header"></slot>
 				<b-card-body>
-					<validation-provider
-						vid="name"
-						name="Name"
-						:rules="{ required: true, min: 3, max: 50 }"
-						v-slot="validationContext"
-					>
-						<b-form-group label="Name" label-for="name" label-cols-lg="4" label-cols-xl="3" class="mb-4">
-							<b-form-input
-								autofocus
-								name="name"
-								size="lg"
-								type="text"
-								v-model="entity.name"
-								required
-								placeholder="Required"
-								:state="getValidationState(validationContext)"
-								:disabled="saving"
-							/>
-							<b-form-invalid-feedback
-								v-for="error in validationContext.errors"
-								:key="error"
-								v-text="error"
-							/>
-						</b-form-group>
-					</validation-provider>
+					<div class="row">
+            <!-- Name Field -->
+            <div class="col-lg-6 col-xl-4 mb-4">
+              <validation-provider
+                vid="name"
+                name="Name"
+                :rules="{ required: true, min: 3, max: 50 }"
+                v-slot="validationContext"
+              >
+                <b-form-group>
+                  <label for="name" class="col-form-label col-form-label-lg">Name</label>
+                  <b-form-input
+                    id="name"
+                    autofocus
+                    name="name"
+                    type="text"
+                    v-model="entity.name"
+                    required
+                    placeholder="Required"
+                    :state="getValidationState(validationContext)"
+                    :disabled="saving"
+                  />
+                  <b-form-invalid-feedback
+                    v-for="error in validationContext.errors"
+                    :key="error"
+                    v-text="error"
+                  />
+                </b-form-group>
+              </validation-provider>
+            </div>
+			<div class="col-lg-1 col-xl-1 d-flex align-items-center justify-content-center">
+              <p class="my-3">Of</p>
+            </div>
+            <!-- State Field -->
+            <div class="col-lg-6 col-xl-4 mb-4">
+              <validation-provider
+                vid="state"
+                name="State"
+                :rules="{ required: false }"
+                v-slot="validationContext"
+              >
+                <b-form-group>
+                  <label for="state" class="col-form-label col-form-label-lg">State</label>
+                  <b-form-select
+                    id="state"
+                    name="state"
+                    v-model="selectedStateName"
+                    :options="usaStates"
+                    value-field="name"
+                    text-field="name"
+                    placeholder="Enter State (if applicable)"
+                    :state="getValidationState(validationContext)"
+                    :disabled="saving"
+                  />
+                  <small class="form-text text-muted">
+                    Please select the state if it is applicable to your case.
+                  </small>
+                </b-form-group>
+              </validation-provider>
+			  </div>
+			          </div>
+                    			<b-form-group
+									label="Active"
+									label-for="active"
+									label-cols-lg="2"
+									description="Inactive providers will not show up in dropdown lists."
+								>
+									<b-form-checkbox name="active" v-model="entity.active">Active</b-form-checkbox>
+								</b-form-group>
 
-					<validation-provider
-						vid="default_insurance_type_id"
-						name="Type"
-						:rules="{ required: true }"
-						v-slot="validationContext"
-					>
-						<b-form-group
-							label="Type"
-							label-for="default_insurance_type_id"
-							label-cols-lg="4"
-							label-cols-xl="3"
-						>
-							<b-form-radio-group
-								name="default_insurance_type_id"
-								v-model="entity.default_insurance_type_id"
-								:options="insuranceTypes"
-								:disabled="saving || loadingInsuranceTypes"
-								:state="getValidationState(validationContext)"
-								value-field="id"
-								text-field="name"
-								required
-							/>
-							<b-form-invalid-feedback
-								v-for="error in validationContext.errors"
-								:key="error"
-								v-text="error"
-							/>
-						</b-form-group>
-					</validation-provider>
-
+					 <div class="d-flex align-items-start">
+    <validation-provider vid="default_insurance_type_id" name="Type" :rules="{ required: true }" v-slot="validationContext">
+      <b-form-group label="Audit Type(s)" label-for="default_insurance_type_id" label-cols-lg="4" label-cols-xl="3">
+        <b-form-checkbox-group
+          name="insurance_type_ids"
+          v-model="entity.insurance_type_ids"
+          :options="insuranceTypes"
+          :disabled="saving || loadingInsuranceTypes"
+          value-field="id"
+          text-field="name"
+          :multiple="true"
+        />
+        <b-form-invalid-feedback v-for="error in validationContext.errors" :key="error" v-text="error" />
+      </b-form-group>
+    </validation-provider>
+    <b-button variant="success" size="sm" @click="openCustomAuditTypeModal" class="ml-2">
+      <font-awesome-icon icon="plus" fixed-width />
+      Add More
+    </b-button>
+  </div>
+  
+  <b-modal id="customAuditTypeModal" title="Add Custom Audit Type" @ok="addCustomAuditType">
+    <b-form-input
+      id="newAuditType"
+      name="newAuditType"
+      type="text"
+      v-model="newAuditType"
+      placeholder="Add custom type"
+      :disabled="saving"
+    />
+  </b-modal>
 					<b-form-group label="Decision Levels" label-for="entity.appeal_levels" label-cols-lg="4" label-cols-xl="3">
 						<div v-if="entity.appeal_levels.length > 0">
 							<div v-for="(appealLevel, index) in entity.appeal_levels" :key="index" class="mb-2">
@@ -645,26 +690,26 @@
 								</validation-provider>
 
 								<validation-provider
-									vid="email"
-									name="Email"
-									:rules="{ required: false, email: true }"
-									v-slot="validationContext"
-								>
-									<b-form-group label="Website" label-for="email" label-cols-lg="4">
-										<b-form-input
-											name="email"
-											type="email"
-											v-model="entity.email"
-											:state="getValidationState(validationContext)"
-											:disabled="saving"
-										/>
-										<b-form-invalid-feedback
-											v-for="error in validationContext.errors"
-											:key="error"
-											v-text="error"
-										/>
-									</b-form-group>
-								</validation-provider>
+								vid="additionalContact"
+								name="Additional Contact Method"
+								:rules="{ required: true }" 
+								v-slot="validationContext"
+							>
+								<b-form-group label="Additional Contact Method" label-for="additionalContact" label-cols-lg="4">
+									<b-form-input
+										name="additionalContact"
+										type="text"
+										v-model="entity.additionalContact"
+										:state="getValidationState(validationContext)"
+										:disabled="saving"
+									/>
+									<b-form-invalid-feedback
+										v-for="error in validationContext.errors"
+										:key="error"
+										v-text="error"
+									/>
+								</b-form-group>
+       					 </validation-provider>
 							</b-card-body>
 						<!-- </b-collapse> -->
 					</b-card>
@@ -693,7 +738,7 @@
 import { mapGetters } from "vuex";
 import { formatErrors, getValidationState } from "@/validation";
 import AgencyForm from "@/clients/components/Agencies/Form.vue";
-
+import axios from 'axios';
 export default {
 	name: "InsuranceProviderForm",
 	components: {
@@ -720,14 +765,68 @@ export default {
 				city: null,
 				state: null,
 				zip: null,
-				insurance_types: {
-					_ids: [],
-				},
+				insurance_types: [],
+                insurance_type_ids: [],
+				newAuditType: "",
 				appeal_levels: [
 					// {} Join table entity
 				],
 			},
 			addingAgency: false,
+            selectedState: null, // New property to store the selected state
+				usaStates: [
+				        { name: "Not Applicable" },
+						{ name: "Alabama" },
+						{ name: "Alaska" },
+						{ name: "Arizona" },
+						{ name: "Arkansas" },
+						{ name: "California" },
+						{ name: "Colorado" },
+						{ name: "Connecticut" },
+						{ name: "Delaware" },
+						{ name: "Florida" },
+						{ name: "Georgia" },
+						{ name: "Hawaii" },
+						{ name: "Idaho" },
+						{ name: "Illinois" },
+						{ name: "Indiana" },
+						{ name: "Iowa" },
+						{ name: "Kansas" },
+						{ name: "Kentucky" },
+						{ name: "Louisiana" },
+						{ name: "Maine" },
+						{ name: "Maryland" },
+						{ name: "Massachusetts" },
+						{ name: "Michigan" },
+						{ name: "Minnesota" },
+						{ name: "Mississippi" },
+						{ name: "Missouri" },
+						{ name: "Montana" },
+						{ name: "Nebraska" },
+						{ name: "Nevada" },
+						{ name: "New Hampshire" },
+						{ name: "New Jersey" },
+						{ name: "New Mexico" },
+						{ name: "New York" },
+						{ name: "North Carolina" },
+						{ name: "North Dakota" },
+						{ name: "Ohio" },
+						{ name: "Oklahoma" },
+						{ name: "Oregon" },
+						{ name: "Pennsylvania" },
+						{ name: "Rhode Island" },
+						{ name: "South Carolina" },
+						{ name: "South Dakota" },
+						{ name: "Tennessee" },
+						{ name: "Texas" },
+						{ name: "Utah" },
+						{ name: "Vermont" },
+						{ name: "Virginia" },
+						{ name: "Washington" },
+						{ name: "West Virginia" },
+						{ name: "Wisconsin" },
+						{ name: "Wyoming" }
+           ],
 			levelTypeOptions: [
 				{ value: 'Pre-Appeal', text: 'Pre-Appeal' },
 				{ value: 'Appeal', text: 'Appeal' },
@@ -782,6 +881,40 @@ export default {
 	
 	},
 	methods: {
+        openCustomAuditTypeModal() {
+      // Open the custom audit type modal when the "Add More" button is clicked
+      this.$bvModal.show("customAuditTypeModal");
+    },
+	async addCustomAuditType() {
+
+		console.log("started");
+        const newType = this.newAuditType;
+
+        // Check if the new type is not empty
+        if (newType.trim() === '') {
+            return;
+        }
+
+        // Send a POST request to your controller to add the new type
+        axios.post('/client/addtype', { newType })
+            .then((response) => {
+                // Handle the response, e.g., update the insuranceTypes list
+                this.insuranceTypes.push(response.data);
+
+                // Close the modal
+                this.$bvModal.hide('customAuditTypeModal');
+
+                // Clear the input field
+                this.newAuditType = '';
+				console.log("check",response);
+
+				window.location.reload();
+            })
+            .catch((error) => {
+                // Handle any errors, e.g., show an error message
+                console.error('Error adding new type:', error);
+            });
+    },
 		getValidationState,
 		cancel() {
 			this.$emit("cancel");
@@ -813,7 +946,16 @@ export default {
 			try {
 				
 				this.saving = true;
-
+                
+						if (this.selectedStateName && this.selectedStateName !== "Not Applicable") {
+						this.entity.name = `${this.entity.name} of ${this.selectedStateName}`;
+						} else {
+						this.entity.name = this.entity.name;
+						}
+						 // Populate the insurance_types array with the selected insurance types
+						this.entity.insurance_types = this.entity.insurance_type_ids.map(id => {
+						return { id }; // Assuming the structure of insurance types is an object with an 'id' field
+    });
 				const request = Object.assign({}, this.entity);
 				const response = await this.$store.dispatch("insuranceProviders/save", request);
 
