@@ -1,0 +1,207 @@
+/**
+ * RevKeep Utility Classes
+ *
+ * Utility CSS classes to polyfill deficiencies
+ * in Bootstrap v4, due to Bootstrap-Vue dependency.
+ */
+
+// Text Color
+.text-brand-primary {
+	color: $brand-primary;
+}
+.text-brand-accent {
+	color: $brand-accent;
+}
+.text-brand-strong {
+	color: $brand-strong;
+}
+.text-brand-dim {
+	color: $brand-dim;
+}
+
+// Background Alignment
+.bg-cover {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+// Background Color
+.bg-brand-primary {
+	background-color: $brand-primary;
+}
+.bg-brand-accent {
+	background-color: $brand-accent;
+}
+.bg-brand-strong {
+	background-color: $brand-strong;
+}
+.bg-brand-dim {
+	background-color: $brand-dim;
+}
+
+// Antialiasing
+.antialiased {
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+	font-smooth: always;
+}
+
+// Overflow
+.overflow-y-auto {
+	overflow-y: auto;
+}
+.overflow-y-scroll {
+	overflow-y: scroll;
+}
+
+// Width
+.w-6 {
+	width: 6rem;
+}
+.w-8 {
+	width: 8rem;
+}
+.w-10 {
+	width: 10rem;
+}
+.w-12 {
+	width: 12rem;
+}
+
+// Min Width
+.min-w-10 {
+	min-width: 10rem;
+}
+.min-w-20 {
+	min-width: 20rem;
+}
+
+// Max Width
+.max-w-10 {
+	max-width: 10rem;
+}
+.max-w-20 {
+	max-width: 20rem;
+}
+.max-w-30 {
+	max-width: 30rem;
+}
+
+// Max Height
+.mh-20 {
+	max-height: 20rem;
+}
+.mh-40 {
+	max-height: 40rem;
+}
+
+// Large
+@media (max-width: 991.98px) {
+.mh-lg-auto {
+	max-height: auto;
+}
+}
+
+// Rounded
+.rounded-t-0 {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+.rounded-b-0 {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+// Flex / Columns
+.nowrap {
+	white-space: nowrap;
+}
+.row-eq-height {
+	iframe {
+		flex: 1 1 auto;
+		display: flex; /* new */
+	}
+}
+
+// Cursor
+.cursor-pointer {
+	cursor: pointer;
+}
+.cursor-disabled,
+.dropdown-item.disabled,
+.btn.disabled {
+	cursor: not-allowed;
+}
+
+.cursor-grabbable {
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+ /* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.cursor-grabbable:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+// Pointer events for dealing with iframes and drag and drop upload
+.pointer-events-auto {
+	pointer-events: auto;
+}
+.pointer-events-none {
+	pointer-events: none;
+}
+
+// Text Transforms
+.white-space-pre {
+	white-space: pre-line;
+}
+
+// Text Selection
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	 -khtml-user-select: none; /* Konqueror HTML */
+	   -moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently
+								  supported by Chrome and Opera */
+}
+
+// Animations
+.slide-fade-enter-active {
+	transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+	transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+	transform: translateY(20px);
+	opacity: 0;
+}
+
+.bounce-enter-active {
+	animation: bounce-in 0.5s;
+  }
+  .bounce-leave-active {
+	animation: bounce-in 0.5s reverse;
+  }
+  @keyframes bounce-in {
+	0% {
+	  transform: scale(0);
+	}
+	50% {
+	  transform: scale(1.25);
+	}
+	100% {
+	  transform: scale(1);
+	}
+  }

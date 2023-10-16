@@ -1,0 +1,113 @@
+// Variables
+@import "_variables";
+
+/**
+ * Dependencies
+ */
+
+// Bootstrap
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap-vue/src/index.scss';
+
+// Vue-Multiselect
+@import "../../node_modules/vue-multiselect/dist/vue-multiselect.min.css";
+
+// Utilities
+@import "_utilities";
+
+/**
+ * Application
+ */
+
+html, body {
+	min-height: 100vh;
+	height: 100%;
+}
+html {
+	-webkit-text-size-adjust: 100%;
+}
+body {
+	/* Prevent jumping when scrollbar appears by always showing vertical scrollbar */
+	/* Looks ugly on full page loader though */
+	overflow-y: scroll;
+
+	/* Background Gradient */
+	/* Disabled for performance for now */
+	// background: #FFF;
+	// background: radial-gradient(rgb(255, 255, 255), rgb(250, 250, 250));
+	// background: -webkit-radial-gradient(rgb(255, 255, 255), rgb(250, 250, 250));
+
+	background-color: #FAFAFA;
+}
+textarea {
+	resize: vertical !important;
+}
+
+// App Element
+div#app {
+	height: 100%;
+}
+
+// Fix for font awesome SVG margin
+a svg.svg-inline--fa {
+	margin-right: .5em;
+}
+
+// Search Inputs
+input[type=search] {
+	transition: all .5s ease-in-out;
+	background-color: #FFF;
+}
+input[type=search].searching {
+	background-color: #DDD;
+}
+// Loading typeaheads
+input[type=text].form-control.loading {
+    background-image: url("../img/ajax-loader.gif");
+    background-repeat: no-repeat ;
+    background-position-x: 95% ;
+    background-position-y: 50% ;
+}
+
+// Animation
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+	opacity: 0;
+}
+
+// Tables
+.table {
+	font-variant-numeric: tabular-nums;
+}
+.table-responsive.mb-0 .table {
+	margin-bottom: 0em;
+}
+tr.align-middle td {
+	vertical-align: middle;
+}
+.table.table-headers-muted th {
+	vertical-align: middle;
+	font-size: .7rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #AAAAAA;
+}
+.table.table-data-right td {
+	text-align: right;
+}
+
+// Fixed height frames
+.pdfFrame {
+	margin: 0em;
+	min-height: 52rem;
+	resize: vertical;
+	overflow-y: scroll;
+	box-sizing: border-box;
+}
+
+// Fix text-muted color when on an active list item
+.list-group .list-group-item.active .text-muted {
+	color: #FFF !important;
+}

@@ -1,0 +1,46 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.224.2/containers/php
+{
+	"name": "revkeep-dev",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/revkeep,type=bind",
+	"workspaceFolder": "/workspaces/revkeep",
+	"build": {
+		"dockerfile": "./Dockerfile",
+		"args": {
+			"VARIANT": "8.1-apache-bullseye",
+			"NODE_VERSION": "18",
+			"APACHE_DOCUMENT_ROOT": "/workspaces/revkeep"
+		}
+	},
+	"containerEnv": {
+		"CONTAINER_NAME": "revkeep-dev",
+		"APACHE_DOCUMENT_ROOT": "/workspaces/revkeep"
+	},
+	"runArgs": [
+		"--network=host"
+	],
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"php.validate.executablePath": "/usr/local/bin/php"
+	},
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"xdebug.php-debug",
+		"bmewburn.vscode-intelephense-client",
+		"mrmlnc.vscode-apache",
+		"firefox-devtools.vscode-firefox-debug",
+		"ritwickdey.LiveServer",
+		"ritwickdey.live-sass",
+		"ms-vscode.js-debug",
+		"eamodio.gitlens"
+	],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [8080, 9003, 1433, 8765],
+	"forwardPorts": [
+		80
+	],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "/workspaces/revkeep/postCreateCommand.sh",
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"containerUser": "vscode" // the value needs to match the value of "remoteUser"
+}

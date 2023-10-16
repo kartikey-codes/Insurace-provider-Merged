@@ -1,0 +1,58 @@
+/*
+ * PDF CSS
+ */
+
+// Bootstrap Functions
+// Required before custom variables
+@import "bootstrap/scss/functions";
+
+// // Variables
+$enable-flex: false !default;
+$headings-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif: "Helvetica Neue", Georgia, "Times New Roman", Times, serif !default;
+$font-size-base: .9rem;
+$line-height-base: 1.25;
+
+// Bootstrap Core
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+//@import "bootstrap/scss/grid"; // DomPDF does not support flexbox
+@import "bootstrap/scss/utilities";
+
+// Bootstrap Components
+// Depend on one or more bootstrap core components being loaded first (i.e. variables)
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/tables";
+
+/*
+ *
+ * DomPDF CSS
+ *
+ */
+
+ @page {
+	margin: 0rem 0rem 0rem 0rem !important;
+	padding: 0rem 0rem 0rem 0rem !important;
+}
+
+html {
+	margin: 0rem 0rem 0rem 0rem;
+	padding: 0rem 2rem 0rem 0rem;
+}
+
+.content {
+	margin: 0 auto;
+	width: auto;
+	max-width: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.w-100 {
+	width: 100%;
+}

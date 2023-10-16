@@ -1,0 +1,7 @@
+.idea
+config/.env
+config/docker.local.env
+logs
+tmp
+node_modules
+.phpunit.result.cache

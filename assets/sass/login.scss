@@ -1,0 +1,45 @@
+// Bootstrap Functions
+// Required before custom variables
+// @import 'bootstrap/scss/bootstrap'; // All of bootstrap
+@import "bootstrap/scss/functions";
+
+// Custom Variables
+@import "_variables";
+$body-bg: #283f82;
+
+// Bootstrap
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/media";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/spinners";
+
+// Utilities
+@import "_utilities";
+
+/**
+ * Login Layout
+ */
+
+body {
+	background-color: $body-bg;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.btn-loading::content,
+.btn-loading::slotted {
+	content: '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
+}

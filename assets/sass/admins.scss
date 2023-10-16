@@ -1,0 +1,34 @@
+// Variables
+@import "_variables";
+
+// Bootstrap
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap-vue/src/index.scss';
+
+// Utilities
+@import "_utilities";
+
+/**
+ * Application
+ */
+
+ html, body {
+	min-height: 100vh;
+	height: 100%;
+}
+html {
+	-webkit-text-size-adjust: 100%;
+}
+body {
+	/* Prevent jumping when scrollbar appears by always showing vertical scrollbar */
+	/* Looks ugly on full page loader though */
+	overflow-y: scroll;
+
+	/* Background Gradient */
+	/* Disabled for performance for now */
+	// background: #FFF;
+	// background: radial-gradient(rgb(255, 255, 255), rgb(250, 250, 250));
+	// background: -webkit-radial-gradient(rgb(255, 255, 255), rgb(250, 250, 250));
+
+	background-color: #FAFAFA;
+}

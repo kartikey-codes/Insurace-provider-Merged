@@ -1,0 +1,10 @@
+parameters:
+    level: 1
+    checkMissingIterableValueType: false
+    treatPhpDocTypesAsCertain: false
+    bootstrapFiles:
+        - config/bootstrap.php
+    paths:
+        - src
+    excludePaths:
+        - src/Console/Installer.php
