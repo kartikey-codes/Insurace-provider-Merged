@@ -150,7 +150,7 @@
 			</b-col>
 		</b-row>
 		<div v-else-if="hasAppeals || hasRequests" class="my-2">
-			<div v-if="hasRequests">
+			<!-- <div v-if="hasRequests">
 				<b-card no-body>
 					<b-card-header>Requests</b-card-header>
 					<b-list-group flush>
@@ -175,7 +175,7 @@
 						</b-list-group-item>
 					</b-list-group>
 				</b-card>
-			</div>
+			</div> -->
 			<div v-if="hasAppeals">
 				<b-card no-body>
 					<b-card-header>Appeals</b-card-header>
