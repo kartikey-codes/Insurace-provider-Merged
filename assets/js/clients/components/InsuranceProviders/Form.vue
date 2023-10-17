@@ -692,12 +692,12 @@
 								<validation-provider
 								vid="additionalContact"
 								name="Additional Contact Method"
-								:rules="{ required: true }" 
+								:rules="{ required: false }" 
 								v-slot="validationContext"
 							>
 								<b-form-group label="Additional Contact Method" label-for="additionalContact" label-cols-lg="4">
 									<b-form-input
-										name="additionalContact"
+										name="Website"
 										type="text"
 										v-model="entity.additionalContact"
 										:state="getValidationState(validationContext)"
