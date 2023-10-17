@@ -68,7 +68,7 @@
 							<b-col cols="12" md="6" class="mb-4">
 								<b-card no-body class="shadow-sm">
 									<b-card-header class="font-weight-bold text-uppercase text-muted">
-										Appeal Levels
+										Decision Levels
 									</b-card-header>
 									<b-list-group flush v-if="entity.appeal_levels && entity.appeal_levels.length > 0">
 										<b-list-group-item
@@ -110,7 +110,7 @@
 							<b-col cols="12" md="6" class="mb-4">
 								<b-card no-body class="shadow-sm">
 									<b-card-header class="font-weight-bold text-uppercase text-muted">
-										Types
+										Audit Type(s)
 									</b-card-header>
 									<b-list-group
 										flush
