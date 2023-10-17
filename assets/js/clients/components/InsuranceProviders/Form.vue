@@ -276,7 +276,7 @@
 															step="1"
 															min="0"
 															max="365"
-															default="30"
+															default="0"
 															v-model="appealLevel._joinData.Grace_days"
 															:disabled="saving"
 															:state="getValidationState(validationContext)"
@@ -620,7 +620,7 @@
 						</b-card-header> -->
 						<!-- <b-collapse id="collapseContact" role="tabpanel"> -->
 							<b-card-body>
-								<h5 class="h5 mb-4 text-uppercase font-weight-bold">Contact</h5>
+								<h5 class="h5 mb-4 text-uppercase font-weight-bold">Contact Information</h5>
 								<validation-provider
 									vid="phone"
 									name="Phone"
@@ -773,7 +773,7 @@ export default {
 				],
 			},
 			addingAgency: false,
-            selectedState: null, // New property to store the selected state
+            selectedStateName: "Not Applicable", // New property to store the selected state
 				usaStates: [
 				        { name: "Not Applicable" },
 						{ name: "Alabama" },
