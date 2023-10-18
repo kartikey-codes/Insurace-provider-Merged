@@ -877,7 +877,8 @@ export default {
 					id: this.entity.id || null,
 					case_id: this.entity.case_id || this.caseEntity.id,
 					appeal_type_id: this.entity.appeal_type_id,
-					appeal_level_id: this.entity.appeal_level_id,
+					// appeal_level_id: this.entity.appeal_level_id,
+					appeal_level_id: null,
 					days_to_respond: this.entity.days_to_respond,
 					days_to_respond_from_id: this.entity.days_to_respond_from_id,
 					letter_date: this.entity.letter_date,
@@ -1029,7 +1030,8 @@ export default {
 					count ++;
 				}
 				});
-				console.log("response = " , this.insuranceData);
+				this.insuranceData.sort((a,b)=> a.id - b.id);
+				console.log("response updated = " , this.insuranceData);
 				console.log("case entity =", this.caseEntity);
 				console.log("appeal =", this.entity.appeal_level_id);
 				} 

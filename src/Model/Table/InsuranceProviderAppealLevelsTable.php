@@ -25,10 +25,8 @@ class InsuranceProviderAppealLevelsTable extends Table
 	{
 		$this->setTable('insurance_provider_appeal_levels');
 
-		$this->setPrimaryKey([
-			'insurance_provider_id',
-			'appeal_level_id',
-		]);
+		// Set the primary key to 'id' with auto-increment
+		$this->setPrimaryKey('id');
 
 		/**
 		 * -------------------------------------

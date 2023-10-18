@@ -184,7 +184,10 @@
 							<b-row>
 								<b-col cols="8" md="6" lg="12" xl="6" class="text-left mb-2 mb-md-0">
 									<p class="mb-0">
-										<span v-if="appeal.appeal_level && appeal.appeal_level.name">
+										<!-- <span v-if="appeal.appeal_level && appeal.appeal_level.name">
+											{{ appealLevelNames[i] }}
+										</span> -->
+										<span v-if="true">
 											{{ appealLevelNames[i] }}
 										</span>
 										<span v-else class="text-danger"> Missing Level </span>
@@ -238,9 +241,10 @@
 							<!-- use appeal_level_id for rendering -->
 							<b-card no-body>
 								<b-card-header >Requests </b-card-header>
-							 <div v-for="request,i in request_list" :key="request.id" class="shadow-sm upper-space">
+							 <div v-for="request,j in request_list" :key="request.id" class="shadow-sm upper-space">
 								
-								<b-row v-if="request.case_id===appeal.case_id && request.appeal_level == appeal.appeal_level_id " >
+								<!-- <b-row v-if="request.case_id===appeal.case_id && request.appeal_level == appeal.appeal_level_id " > -->
+									<b-row v-if="request.case_id===appeal.case_id && request.appeal_level == i">
 									<b-col cols="8" md="6" lg="12" xl="6" class="text-left mb-2 mb-md-0">
 										<p  class="font-weight-bold mb-0 custom-padding" >
 											<span>
@@ -248,7 +252,7 @@
 											</span>
 										</p>
 										<p class="mb-0 text-muted custom-padding">
-											<span > {{ request.type_label }} Request </span>
+											<span > {{ request.type_label }} Request</span>
 										</p>
 										<p v-if="request.status_label !== 'Closed'" class="custom-padding">
 											<span
@@ -256,7 +260,7 @@
 												class="small"
 												:class="request.is_overdue ? 'text-danger font-weight-bold' : 'text-muted'"
 											>
-												Due on {{ $filters.formatDate(request.due_date) }} {{ i }}
+												Due on {{ $filters.formatDate(request.due_date) }} 
 											</span>
 										</p>
 										<div class="custom-padding">
@@ -421,6 +425,7 @@ export default {
 			selectedOptionL7: null,
 			responseReceived:true,
 			appealLevelNames:[],
+			appealLevelNamesObj:[],
 		};
 	},
 	computed: {
@@ -553,18 +558,29 @@ export default {
 				console.log("appeals =" , this.appeals);
 				console.log("case entity = ",this.caseEntity);
 				console.log("insurance response = ", responseInsurance.data);
-				this.appealLevelNames = []
+				this.appealLevelNames = [];
+				this.appealLevelNamesObj = [];
 				this.appeals.forEach((item, index) => {
 				console.log(`Element at index ${index}:`, item);
 				console.log("appeal level id = ",item.appeal_level_id);
 				responseInsurance.data.forEach((value, i)=>{
-					if(item.appeal_level_id==value.appeal_level_id){
-					console.log('insurance =',value.appeal_level_id);
-					this.appealLevelNames.push(value.label)
+					if(this.caseEntity.insurance_provider_id==value.insurance_provider_id){
+					console.log('insurance =',value);
+						if(index==0){
+							// this.appealLevelNames.push(value.label);
+							console.log('value of index = ',index);
+							this.appealLevelNamesObj.push({label:value.label , id:value.id});
+						}
 					}
 				})
+				return;
 				});
-				console.log('details = ', this.appealLevelNames);
+				this.appealLevelNamesObj.sort((a,b)=> a.id - b.id);
+				this.appealLevelNamesObj.forEach((item,index)=>{
+					this.appealLevelNames.push(item.label);
+				});
+				console.log('details  = ', this.appealLevelNames);
+				console.log('details obj updated = ', this.appealLevelNamesObj);
 
 				} 
 			catch (error) {

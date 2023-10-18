@@ -545,6 +545,10 @@ export default {
 					count ++;
 				}
 				});
+				this.insuranceData.sort((a,b)=> a.id - b.id);
+				this.insuranceData.forEach((item,index)=>{
+					item.count=index;
+				});
 				console.log("response = " , this.insuranceData);
 				console.log("case entity =", this.caseEntity);
 				
@@ -558,7 +562,7 @@ export default {
 		updateAppealLevelCount(){
 			const selectedOption = this.insuranceData.find(option => option.id === this.entity.status);
 			if (selectedOption) {
-				this.entity.appeal_level = selectedOption.id;
+				this.entity.appeal_level = selectedOption.count;
 			} else {
 				this.entity.appeal_level = null; // Handle the case where no option is selected
 			}
